@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+    volumes:
+      - ./app:/code
+    depends_on:
+      - redis
+
+
+  redis:
+    image: "redis:alpine"
