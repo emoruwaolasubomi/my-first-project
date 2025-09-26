@@ -62,13 +62,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: SSH and Deploy
-        uses: appleboy/ssh-action@v0.1.7
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
-          script: |
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app            sudo docker stop my-python-app || true
+          script: | 
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app:latest
 
             sudo docker run -d --name my-python-app  -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app:latest
